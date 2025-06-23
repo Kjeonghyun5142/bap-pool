@@ -1,27 +1,27 @@
-// IndexPage.jsx
+// src/pages/IndexPage.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import './IndexPage.css'; // 우리가 따로 만든 CSS
 
-const IndexPage = () => (
-  <div className="text-center bg-gray-100 min-h-screen">
-    <header className="bg-indigo-600 text-white p-4">
-      <h2 className="text-2xl font-bold">🍚 밥풀 BapPool</h2>
-      <nav className="mt-2">
-        <Link to="/login" className="mx-4 underline">로그인</Link>
-        <Link to="/signup" className="mx-4 underline">회원가입</Link>
-      </nav>
-    </header>
+export default function IndexPage() {
+  const navigate = useNavigate();
 
-    <section className="mt-20">
-    <h1 className="text-4xl font-bold">혼밥 그만! 같이 시켜요!</h1>
-      <p className="mt-4 text-lg">기숙사, 자취생들을 위한 배달비 아끼는 플랫폼</p>
-      <Link to="/login">
-        <button className="mt-6 bg-indigo-600 text-white px-6 py-3 rounded-lg text-lg hover:bg-indigo-700">
-          지금 시작하기
-        </button>
-      </Link>
-    </section>
-  </div>
-);
+  return (
+    <div className="container">
+      <header className="header">
+        <h2>🍚 밥풀 BapPool</h2>
+        <nav>
+          <Link to="/intro">서비스 소개</Link>
+          <Link to="/login">로그인</Link>
+          <Link to="/signup">회원가입</Link>
+        </nav>
+      </header>
 
-export default IndexPage;
+      <section className="hero">
+        <h1>혼밥 그만! 같이 시켜요!</h1>
+        <p>기숙사, 자취생들을 위한 배달비 아끼는 플랫폼</p>
+        <button onClick={() => navigate('/signup')}>지금 시작하기</button>
+      </section>
+    </div>
+  );
+}

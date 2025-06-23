@@ -1,53 +1,28 @@
-// src/pages/Login.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './Login.css';
 
-const Login = () => {
+export default function Login() {
   return (
-    <div className="min-h-screen bg-gray-100 p-8 font-sans">
-      <form className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-center text-2xl font-semibold mb-6">로그인</h2>
+    <div className="login-container">
+      <div className="login-box">
+        <h2>로그인</h2>
+        <form>
+          <label htmlFor="email">이메일</label>
+          <input type="email" id="email" name="email" required />
 
-        <label htmlFor="email" className="block mt-4">
-          이메일
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-        />
+          <label htmlFor="password">비밀번호</label>
+          <input type="password" id="password" name="password" required />
 
-        <label htmlFor="password" className="block mt-4">
-          비밀번호
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          required
-          className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-        />
+          <button type="submit">로그인</button>
+        </form>
 
-        <button
-          type="submit"
-          className="w-full mt-6 bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700"
-        >
-          로그인
-        </button>
-
-        <div className="text-center mt-4 text-sm text-indigo-600">
-          <a href="/signup" className="mx-1 hover:underline">
-            회원가입
-          </a>
-          |
-          <a href="#" className="mx-1 hover:underline">
-            비밀번호 찾기
-          </a>
+        <div className="login-links">
+          <Link to="/signup">회원가입</Link>
+          <span>|</span>
+          <Link to="/forgot">비밀번호 찾기</Link>
         </div>
-      </form>
+      </div>
     </div>
   );
-};
-
-export default Login;
+}
