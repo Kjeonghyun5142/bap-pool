@@ -1,13 +1,29 @@
 // src/pages/Write.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Write = () => {
+  const [zones, setZones] = useState([]); // 서버에서 받은 zone 목록 저장
   const [form, setForm] = useState({
     title: '',
     content: '',
     min_price: '',
-    zone_id: 'zone-a',
+    deadline: '',    // 🔥 추가
+    zone_id: '',     // 초기에는 빈 문자열로 시작
   });
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/zones', { credentials: 'include' })
+      .then(res => res.json())
+      .then(data => {
+        setZones(data);
+        if (data.length > 0) {
+          setForm(prev => ({ ...prev, zone_id: data[0].id }));
+        }
+      })
+      .catch(err => {
+        console.error('존 목록 불러오기 실패:', err);
+      });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,12 +37,13 @@ const Write = () => {
       const res = await fetch('http://localhost:3000/api/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(form),
       });
 
       if (res.ok) {
         alert('글이 성공적으로 등록되었습니다!');
-        window.location.href = '/main'; // 등록 후 메인으로 이동
+        window.location.href = '/main';
       } else {
         alert('등록 실패!');
       }
@@ -73,6 +90,16 @@ const Write = () => {
           className="w-full p-2 border rounded mt-1"
         />
 
+        <label className="block mt-4">마감일</label>
+        <input
+          type="datetime-local"
+          name="deadline"
+          required
+          value={form.deadline}
+          onChange={handleChange}
+          className="w-full p-2 border rounded mt-1"
+        />
+
         <label className="block mt-4">밥풀존 선택</label>
         <select
           name="zone_id"
@@ -80,9 +107,11 @@ const Write = () => {
           onChange={handleChange}
           className="w-full p-2 border rounded mt-1"
         >
-          <option value="zone-a">밥풀존 A (기숙사)</option>
-          <option value="zone-b">밥풀존 B (자취방)</option>
-          <option value="zone-c">밥풀존 C (기타)</option>
+          {zones.map(zone => (
+            <option key={zone.id} value={zone.id}>
+              {zone.name} ({zone.address})
+            </option>
+          ))}
         </select>
 
         <button

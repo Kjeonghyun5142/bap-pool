@@ -24,6 +24,7 @@ export default function Login() {
 
       if (res.ok) {
         console.log('✅ 로그인 성공:', data);
+        console.log('👉 페이지 이동 시도');
         // 로그인 성공 시 메인 페이지로 이동
         navigate('/main');
       } else {
