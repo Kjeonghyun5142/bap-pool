@@ -1,26 +1,29 @@
+// routes/zones.js
+
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
 
-// 모든 Zone 조회
+// ✅ 모든 Zone 조회: GET /api/zones
 router.get('/', async (req, res) => {
   try {
-    console.log('Fetching zones...');
+    console.log('📡 GET /api/zones 요청 도착');
     const zones = await db.Zone.findAll({
       attributes: ['id', 'name', 'address', 'created_at'],
     });
-    console.log('Zones fetched:', zones); // 데이터 확인
+
     if (zones.length === 0) {
       return res.status(404).json({ message: 'No zones found' });
     }
+
     res.status(200).json(zones);
   } catch (error) {
-    console.error('Error fetching zones:', error.stack); // 상세 에러
+    console.error('❌ Zone 조회 실패:', error.stack);
     res.status(500).json({ message: 'Failed to fetch zones', error: error.message });
   }
 });
 
-// 새로운 Zone 생성
+// ✅ 새로운 Zone 생성: POST /api/zones
 router.post('/', async (req, res) => {
   try {
     const { name, address } = req.body;
@@ -32,7 +35,7 @@ router.post('/', async (req, res) => {
     const newZone = await db.Zone.create({
       name,
       address,
-      created_at: new Date(),
+      created_at: new Date(), // Sequelize에서 timestamps: false면 직접 넣어줘야 함
     });
 
     res.status(201).json({
@@ -40,8 +43,8 @@ router.post('/', async (req, res) => {
       zone: newZone,
     });
   } catch (error) {
-    console.error('Error creating zone:', error);
-    res.status(500).json({ message: 'Failed to create zone' });
+    console.error('❌ Zone 생성 실패:', error.stack);
+    res.status(500).json({ message: 'Failed to create zone', error: error.message });
   }
 });
 
