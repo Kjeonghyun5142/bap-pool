@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입 - 밥풀</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9fafb;
+      padding: 2rem;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.8rem;
+      width: 100%;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="sihnupForm">
+    <h2>회원가입</h2>
+
+    <label for="email">이메일</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">비밀번호</label>
+    <input type="password" id="password" name="password" required>
+
+    <label for="nickname">닉네임</label>
+    <input type="text" id="nickname" name="nickname" required>
+
+    <label for="dormitory">거주 형태</label>
+    <select id="dormitory" name="dormitory">
+      <option value="dorm">기숙사</option>
+      <option value="one_room">자취</option>
+      <option value="etc">기타</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="terms" required> 약관에 동의합니다
+    </label>
+
+    <button type="submit">가입하기</button>
+    <p id="signupMessage" class="message"></p>
+    <div class="links">
+        <a href="login.html">이미 계정이 있으신가요? 로그인</a> |
+        <a href="first.html">메인으로 돌아가기</a>
+    </div>
+  </form>
+<script>
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const nickname = document.getElementById('nickname').value;
+        const dormitory = document.getElementById('dormitory').value; // residence 대신 dormitory 사용
+        const termsAccepted = document.getElementById('terms').checked; // 약관 동의 확인
+        const signupMessage = document.getElementById('signupMessage');
+
+        if (!termsAccepted) {
+            signupMessage.textContent = '약관에 동의해야 회원가입할 수 있습니다.';
+            signupMessage.className = 'message error';
+            return;
+        }
+
+        try {
+            const response = await fetch('/auth/signup', { // 백엔드 회원가입 엔드포인트
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password, nickname, dormitory }),
+            });
+
+            const data = await response.json(); // 응답을 JSON으로 파싱
+            console.log('Signup response:', data);
+
+            if (response.ok) { // HTTP 상태 코드가 2xx (성공)인 경우
+                signupMessage.textContent = '회원가입 성공! 잠시 후 로그인 페이지로 이동합니다.';
+                signupMessage.className = 'message success';
+                // 성공 후 입력 필드 초기화 (선택 사항)
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+                document.getElementById('nickname').value = '';
+                document.getElementById('dormitory').value = '';
+                document.getElementById('terms').checked = false;
+
+                // 2초 후 로그인 페이지로 리디렉션
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            } else { // HTTP 상태 코드가 2xx가 아닌 경우 (예: 400, 500)
+                signupMessage.textContent = data.message || '회원가입 실패: 알 수 없는 오류';
+                signupMessage.className = 'message error';
+            }
+        } catch (error) { // 네트워크 오류 등 예외 발생 시
+            console.error('Error during signup:', error);
+            signupMessage.textContent = '네트워크 오류 발생. 다시 시도해주세요.';
+            signupMessage.className = 'message error';
+        }
+    });
+</script>
+</body>
+</html>
+ 
