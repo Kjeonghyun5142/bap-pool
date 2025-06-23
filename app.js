@@ -6,6 +6,8 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./models');
 const app = express();
+const cookieParser = require('cookie-parser');
+app.use(cookieParser()); // ✅ 추가
 
 // ⭐️⭐️⭐️ Socket.IO를 위한 HTTP 서버 및 Socket.IO 불러오기 ⭐️⭐️⭐️
 const http = require('http');
@@ -28,7 +30,7 @@ const io = new Server(server, {
   cors: {
     origin: 'http://localhost:5173', // 프론트엔드 개발 서버 주소
     methods: ['GET', 'POST'],
-    credentials: true,
+    credentials: true
   }
 });
 

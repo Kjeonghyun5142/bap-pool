@@ -1,7 +1,10 @@
+//auth.js
     // bap-pool-backend/routes/auth.js
 
     const express = require('express');
+    
     const router = express.Router();
+    const authController = require('../controllers/authController');
     // bcrypt와 jwt는 이제 userController.js에서 직접 사용하므로 여기서 제거합니다.
     // const bcrypt = require('bcryptjs');
     // const jwt = require('jsonwebtoken');
@@ -31,6 +34,6 @@
         res.status(500).json({ message: '로그아웃 처리 중 오류가 발생했습니다.', error: error.message });
       }
     });
-
+   router.post('/login', authController.login);
     module.exports = router;
     
