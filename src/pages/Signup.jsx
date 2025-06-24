@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
+import BackButton from '../components/BackButton';
 
 export default function Signup() {
   const [nickname, setNickname] = useState('');
@@ -109,6 +110,9 @@ export default function Signup() {
 
         <div className="signup-links">
           <Link to="/login">이미 계정이 있으신가요? 로그인</Link>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <BackButton />
         </div>
       </div>
     </div>

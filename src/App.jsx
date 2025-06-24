@@ -6,6 +6,10 @@ import Signup from './pages/Signup';
 import Main from './pages/MainPage'; 
 import PostDetail from './pages/PostDetail';
 import Write from './pages/Write';
+import Intro from './pages/Intro';
+import MyPage from './pages/MyPage'; 
+import EditMyPage from './pages/EditMyPage';
+
 
 function App() {
   return (
@@ -17,6 +21,9 @@ function App() {
         <Route path="/main" element={<Main />} />      
         <Route path="/post/:id" element={<PostDetail />} />
         <Route path="/write" element={<Write />} />
+        <Route path="/intro" element={<Intro />} /> 
+        <Route path="/mypage" element={<MyPage />} /> 
+        <Route path="/mypage/edit" element={<EditMyPage />} />
       </Routes>
     </Router>
   );

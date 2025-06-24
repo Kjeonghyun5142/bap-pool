@@ -1,0 +1,48 @@
+.edit-mypage {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.edit-mypage h2 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.edit-mypage form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-mypage label {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.edit-mypage input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.edit-mypage button {
+  padding: 12px;
+ background-color: #4f46e5;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-mypage button:hover {
+  background-color: #45a049;
+}

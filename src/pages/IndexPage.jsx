@@ -1,7 +1,7 @@
 // src/pages/IndexPage.jsx
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './IndexPage.css'; // 우리가 따로 만든 CSS
+import './IndexPage.css'; 
 
 export default function IndexPage() {
   const navigate = useNavigate();

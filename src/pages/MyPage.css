@@ -1,0 +1,101 @@
+/* src/pages/MyPage.css */
+
+.mypage-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  font-family: sans-serif;
+}
+.mypage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mypage-button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.profile-section,
+.post-section {
+  background-color: #fff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.profile-section h2,
+.post-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.mypage-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.mypage-form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.mypage-form button {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.edit-button {
+  float: right;
+  margin-bottom: 10px;
+}
+
+
+.mypage-form button:hover {
+  background-color: #4338ca;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: box-shadow 0.2s;
+}
+.post-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.post-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-card p {
+  color: #444;
+  margin-bottom: 0.3rem;
+}

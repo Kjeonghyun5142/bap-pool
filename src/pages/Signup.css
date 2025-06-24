@@ -9,6 +9,7 @@
 .signup-box {
   background-color: white;
   padding: 2rem;
+  padding-bottom: 30px; 
   border-radius: 12px;
   width: 100%;
   max-width: 400px;
