@@ -44,9 +44,9 @@ export default function MyPage() {
           <button className="edit-button" onClick={() => navigate('/mypage/edit')}>
             ✏️ 내 정보 수정
           </button>
-          <div className="back-button-wrapper">
-            <BackButton />
-          </div>
+           <button className="back-button" onClick={() => navigate('/main')}>
+            🔙 뒤로가기
+          </button>
         </div>
       </div>
 

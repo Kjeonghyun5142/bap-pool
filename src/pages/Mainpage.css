@@ -19,11 +19,32 @@
   font-weight: bold;
 }
 
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .user-info {
   display: flex;
   align-items: center;
   gap: 1rem;
   font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.logout-btn {
+  font-size: 0.95rem;
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .mypage-link {
@@ -73,4 +94,25 @@
   color: inherit;
 }
 
+}
+/* MainPage.css */
+.search-input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
 }
