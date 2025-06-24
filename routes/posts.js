@@ -22,6 +22,7 @@ router.get('/', getPosts); // <-- getPosts 함수가 유효한지 확인
 
 // GET /posts/:id - 게시글 상세 조회
 router.get('/:id', getPostById); // <-- getPostById 함수가 유효한지 확인
+router.put('/:id', authMiddleware, postController.updatePost);
 
 // PATCH /posts/:id/close - 게시글 마감 (인증 필요, 작성자만)
 router.patch('/:id/close', authMiddleware, closePost);
@@ -46,4 +47,6 @@ router.get('/:id/participants', getParticipants); // ⭐️ 이 라우트 추가
 
 // 인증된 사용자만 가능하며, 해당 게시글의 작성자만 수정 가능
 router.patch('/:id', authMiddleware, postController.updatePost);
+
+
 module.exports = router;
