@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('User', {
+  const User = sequelize.define('User', {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -19,4 +19,16 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'users',
   });
+
+  // ✅ Post와의 관계를 명시
+  User.associate = (models) => {
+    User.hasMany(models.Post, {
+      foreignKey: 'writer_id',
+      as: 'Posts',
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE',
+    });
+  };
+
+  return User;
 };

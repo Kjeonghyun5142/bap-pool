@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true, // Post가 특정 Zone에 속하지 않을 수도 있으므로 true로 설정
       // references, onUpdate, onDelete는 associate 메서드에서 정의합니다.
     },
-    created_at: { // ⭐️⭐️⭐️ created_at, updated_at 컬럼 추가 (timestamps: false 설정 시) ⭐️⭐️⭐️
+    /*created_at: { // ⭐️⭐️⭐️ created_at, updated_at 컬럼 추가 (timestamps: false 설정 시) ⭐️⭐️⭐️
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
       allowNull: false,
@@ -52,10 +52,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
       allowNull: false,
-    }
+    }*/
   }, {
     tableName: 'posts', // 실제 데이터베이스 테이블 이름
-    timestamps: false, // ⭐️⭐️⭐️ created_at, updated_at 컬럼을 수동 관리하므로 false ⭐️⭐️⭐️
+    underscored: true,
+    timestamps: true, 
+    createdAt: 'created_at',
+    updatedAt: 'updated_at', 
+
     // createdAt: 'created_at', // timestamps: true 시 컬럼 이름 매핑
     // updatedAt: 'updated_at', // timestamps: true 시 컬럼 이름 매핑
   });

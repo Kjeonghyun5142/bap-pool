@@ -103,10 +103,11 @@ const getMe = async (req, res) => {
     if (!user) return res.status(401).json({ message: '인증되지 않았습니다.' });
 
     res.status(200).json({
-      id: user.id,
-      email: user.email,
-      nickname: user.nickname,
-      dormitory: user.dormitory,
+      user: { // ✅ 이렇게 감싸야 프론트에서 data.user 로 받을 수 있음!
+        id: user.id,
+        nickname: user.nickname,
+        dormitory: user.dormitory,
+      }
     });
   } catch (error) {
     console.error('❌ getMe 오류:', error.stack);
@@ -114,20 +115,27 @@ const getMe = async (req, res) => {
   }
 };
 
-// ✅ 현재 로그인된 사용자 정보 수정
+
+//✅ 현재 로그인된 사용자 정보 수정
+// PATCH /api/users/me
 const updateMe = async (req, res) => {
   try {
     const user = req.user;
     const { nickname, dormitory } = req.body;
 
-    user.nickname = nickname || user.nickname;
-    user.dormitory = dormitory || user.dormitory;
+    if (!nickname) {
+      return res.status(400).json({ message: '닉네임은 필수입니다.' });
+    }
+
+    user.nickname = nickname;
+    user.dormitory = dormitory;
+
     await user.save();
 
-    res.status(200).json({ message: '정보 수정 완료', user });
+    res.status(200).json({ message: '수정 완료', user: { id: user.id, nickname, dormitory } });
   } catch (error) {
-    console.error('❌ updateMe 오류:', error.stack);
-    res.status(500).json({ message: '정보 수정 실패' });
+    console.error('❌ 사용자 정보 수정 실패:', error);
+    res.status(500).json({ message: '내 정보 수정 중 오류 발생' });
   }
 };
 
