@@ -33,20 +33,25 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.NOW,
     },
   }, {
-    tableName: 'Participants',
-    indexes: [
-      {
-        unique: true,
-        fields: ['user_id', 'post_id']
-      }
-    ]
+    tableName: 'participants',
+    timestamps: true,
+    underscored: true,
   });
+  
+  Participant.associate = (models) => {
+    Participant.belongsTo(models.User, {
+      foreignKey: 'user_id',
+      as: 'ParticipantUser',
+      onDelete: 'CASCADE',
+    });
 
-  // 관계는 models/index.js 또는 이 파일에서 설정
-  // Participant.associate = (models) => {
-  //   Participant.belongsTo(models.User, { foreignKey: 'user_id' });
-  //   Participant.belongsTo(models.Post, { foreignKey: 'post_id' });
-  // };
+    Participant.belongsTo(models.Post, {
+      foreignKey: 'post_id',
+      as: 'ParticipatedPost',
+      onDelete: 'CASCADE',
+    });
+  };
+
 
   return Participant;
 };

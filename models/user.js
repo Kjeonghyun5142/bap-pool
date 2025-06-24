@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('User', {
+  const User = sequelize.define('User', {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -19,4 +19,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'users',
   });
+
+  User.associate = (db) => {
+    User.hasMany(db.Post, { foreignKey: 'writer_id', as: 'Posts' });
+    User.hasMany(db.Participant, { foreignKey: 'user_id', as: 'Participations' });
+    User.hasMany(db.Comment, { foreignKey: 'user_id', as: 'Comments' });
+  };
+
+  return User;
 };

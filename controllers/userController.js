@@ -103,10 +103,12 @@ const getMe = async (req, res) => {
     if (!user) return res.status(401).json({ message: '인증되지 않았습니다.' });
 
     res.status(200).json({
-      id: user.id,
-      email: user.email,
-      nickname: user.nickname,
-      dormitory: user.dormitory,
+      user: { // ✅ 이렇게 감싸야 프론트에서 data.user 로 받을 수 있음!
+        id: user.id,
+        email: user.email,
+        nickname: user.nickname,
+        dormitory: user.dormitory,
+      }
     });
   } catch (error) {
     console.error('❌ getMe 오류:', error.stack);

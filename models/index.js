@@ -40,11 +40,7 @@ db.ChatMessage = require('./chatMessage')(sequelize, DataTypes);
 // 모델 관계 설정 (associate 메서드 호출)
 // ⭐️⭐️⭐️ 여기를 수정합니다! Sequelize.Model 인스턴스만 대상으로 루프를 돕니다. ⭐️⭐️⭐️
 Object.keys(db).forEach((modelName) => {
-  // 'sequelize', 'Sequelize', 'DataTypes' 같은 Sequelize 자체 객체는 건너뜜
-  if (['sequelize', 'Sequelize', 'DataTypes'].includes(modelName)) {
-    return;
-  }
-  // 해당 객체가 모델이고 associate 메서드를 가지고 있다면 호출
+  if (['sequelize', 'Sequelize', 'DataTypes'].includes(modelName)) return;
   if (db[modelName] && typeof db[modelName].associate === 'function') {
     db[modelName].associate(db);
   }
