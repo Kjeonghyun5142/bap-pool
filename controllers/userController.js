@@ -105,6 +105,7 @@ const getMe = async (req, res) => {
     res.status(200).json({
       user: { // ✅ 이렇게 감싸야 프론트에서 data.user 로 받을 수 있음!
         id: user.id,
+        email: user.email,
         nickname: user.nickname,
         dormitory: user.dormitory,
       }

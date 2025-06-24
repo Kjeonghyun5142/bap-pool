@@ -20,14 +20,11 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'users',
   });
 
-  // ✅ Post와의 관계를 명시
-  User.associate = (models) => {
-    User.hasMany(models.Post, {
-      foreignKey: 'writer_id',
-      as: 'Posts',
-      onDelete: 'SET NULL',
-      onUpdate: 'CASCADE',
-    });
+  // 관계 설정은 한 번만 정의
+  User.associate = (db) => {
+    User.hasMany(db.Post, { foreignKey: 'writer_id', as: 'Posts', onDelete: 'SET NULL', onUpdate: 'CASCADE' });
+    User.hasMany(db.Participant, { foreignKey: 'user_id', as: 'Participations' });
+    User.hasMany(db.Comment, { foreignKey: 'user_id', as: 'Comments' });
   };
 
   return User;

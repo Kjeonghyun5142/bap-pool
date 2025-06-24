@@ -62,6 +62,7 @@ const getPosts = async (req, res) => {
 };
 
 // 게시글 상세 조회
+// 게시글 상세 조회
 const getPostById = async (req, res) => {
   try {
     const postId = req.params.id;
@@ -70,16 +71,16 @@ const getPostById = async (req, res) => {
       include: [
         {
           model: db.User,
-          as: 'Writer',
+          as: 'Writer',                // Post.associate에 맞는 alias
           attributes: ['id', 'nickname', 'dormitory']
         },
         {
           model: db.Participant,
-          as: 'Participants',
+          as: 'Participants',          // Post.associate에 맞는 alias
           attributes: ['id', 'user_id', 'post_id'],
           include: {
             model: db.User,
-            as: 'ParticipantUser',
+            as: 'ParticipantUser',     // Participant.associate에 맞는 alias
             attributes: ['id', 'nickname', 'dormitory']
           }
         },
@@ -87,6 +88,17 @@ const getPostById = async (req, res) => {
           model: db.Zone,
           as: 'Zone',
           attributes: ['id', 'name', 'address']
+        },
+        // 여기서 댓글과 댓글 작성자를 추가합니다.
+        {
+          model: db.Comment,
+          as: 'Comments',              // Post.js에서 alias로 설정한 이름과 일치해야 함
+          attributes: ['id', 'content', 'created_at', 'user_id', 'post_id'],
+          include: [{
+            model: db.User,
+            as: 'User',                // Comment.js에서 alias로 설정한 이름과 일치해야 함
+            attributes: ['id', 'nickname', 'dormitory']
+          }]
         }
       ]
     });
@@ -101,6 +113,7 @@ const getPostById = async (req, res) => {
     res.status(500).json({ message: '게시글 상세 조회 실패', error: error.message });
   }
 };
+
 
 // 게시글 마감
 const closePost = async (req, res) => {
