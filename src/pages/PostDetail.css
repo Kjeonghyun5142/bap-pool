@@ -37,3 +37,37 @@
   line-height: 1.6;
   font-size: 1rem;
 }
+
+/* 참여하기 버튼 스타일링 */
+.join-button {
+  position: fixed;  /* 버튼을 화면에 고정 */
+  top: 20px;  /* 상단 20px 위치 */
+  right: 20px;  /* 오른쪽 20px 위치 */
+  padding: 10px 20px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.comments-section {
+  margin-top: 20px;
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.join-button:hover {
+  background-color: #3b3bdb;
+}
