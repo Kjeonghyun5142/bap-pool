@@ -113,7 +113,14 @@ export default function MainPage() {
 
         <div className="post-list">
           {filteredPosts.length === 0 ? (
-            <p>현재 조건에 맞는 글이 없습니다.</p>
+            <div className="empty-state main-empty-fade-in">
+              <h2>📭 아직 게시된 글이 없어요!</h2>
+              <p>같이 먹을 사람을 찾고 있다면, 첫 번째로 글을 올려보세요 😊</p>
+              <Link to="/write">
+                <button className="write-btn">지금 글 작성하기</button>
+              </Link>
+            </div>
+
           ) : (
             filteredPosts.map(post => {
               // console.log('🕒 createdAt:', post.createdAt); // 디버깅용 로그 (필요없으면 삭제)

@@ -1,101 +1,324 @@
-/* src/pages/MyPage.css */
+/* CSS Variables */
+:root {
+  --primary-color: #7c3aed; /* 보라색 계열 */
+  --secondary-color: #f3e8ff; /* 연한 보라색 (배경 시작 색) */
+  --text-color: #1e293b; /* 어두운 텍스트 색상 */
+  --accent-color: #a855f7; /* 강조 색상 (더 밝은 보라색) */
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
+  --border-radius: 12px; /* 둥근 모서리 */
+}
+
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box; /* 패딩과 보더가 너비/높이에 포함되도록 설정 */
+  margin: 0; /* 기본 마진 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+}
 
 .mypage-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-  font-family: sans-serif;
-}
-.mypage-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.mypage-button-group {
-  display: flex;
-  gap: 10px;
+  font-family: 'Nunito', -apple-system, BlinkMacMacFont, 'Segoe UI', Roboto, sans-serif; /* 폰트 설정 */
+  background: linear-gradient(180deg, var(--secondary-color) 0%, #ffffff 100%); /* 그라데이션 배경 */
+  min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  padding: 20px; /* 전체 컨테이너 패딩 */
+  position: relative; /* 의사 요소의 기준점 */
+  overflow: hidden; /* 컨테이너 밖으로 넘어가는 내용 숨김 */
 }
 
+/* Background Pattern (SVG 기반의 작은 원 패턴) */
+.mypage-container::before {
+  content: ''; /* 의사 요소 */
+  position: absolute; /* 절대 위치 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* SVG로 작은 원 패턴 생성 */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="10" cy="10" r="2" fill="rgba(124,58,237,0.1)" /></svg>') repeat;
+  opacity: 0.3; /* 투명도 */
+  z-index: 0; /* 배경이므로 가장 아래에 위치 */
+}
+
+/* Header */
+.mypage-header {
+  width: 100%; /* 너비 100% */
+  max-width: 900px; /* 최대 너비 */
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); /* 그라데이션 배경 */
+  color: #ffffff; /* 텍스트 색상 */
+  padding: 1.5rem 2rem; /* 패딩 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  justify-content: space-between; /* 양 끝 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  box-shadow: var(--shadow); /* 그림자 */
+  border-radius: var(--border-radius); /* 둥근 모서리 */
+  margin-bottom: 2rem; /* 하단 마진 */
+  position: relative; /* z-index를 위한 포지션 */
+  z-index: 1;
+}
+
+.mypage-header h1 {
+  font-size: 2rem; /* 폰트 크기 */
+  font-weight: 800; /* 폰트 굵기 */
+  letter-spacing: -0.03em; /* 자간 조절 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 텍스트 그림자 */
+}
+
+.mypage-button-group {
+  display: flex; /* Flexbox 레이아웃 사용 */
+  gap: 1rem; /* 버튼 간 간격 */
+  align-items: center;
+}
+
+/* Profile and Post Sections */
 .profile-section,
 .post-section {
-  background-color: #fff;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  width: 100%; /* 너비 100% */
+  max-width: 900px; /* 최대 너비 */
+  background-color: #fff; /* 흰색 배경 */
+  padding: 2rem; /* 내부 패딩 */
+  margin-bottom: 2rem; /* 하단 마진 */
+  border-radius: var(--border-radius); /* 둥근 모서리 */
+  box-shadow: var(--shadow); /* 그림자 */
+  position: relative; /* z-index를 위한 포지션 */
+  z-index: 1;
+  animation: fadeInUp 0.8s ease-out forwards; /* 등장 애니메이션 */
 }
 
 .profile-section h2,
 .post-section h2 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 0.5rem;
+  font-size: 1.8rem; /* 폰트 크기 */
+  font-weight: 800; /* 폰트 굵기 */
+  color: var(--text-color); /* 텍스트 색상 */
+  margin-bottom: 1.5rem; /* 하단 마진 */
+  border-bottom: 2px solid var(--secondary-color); /* 하단 테두리 */
+  padding-bottom: 0.8rem; /* 패딩 */
+}
+
+/* Form Styles */
+.mypage-form {
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  gap: 1rem; /* 아이템 간 간격 */
+  margin-bottom: 1rem; /* 하단 마진 */
 }
 
 .mypage-form label {
-  display: block;
-  margin-top: 1rem;
-  font-weight: 600;
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  font-size: 0.95rem; /* 폰트 크기 */
+  font-weight: 600; /* 폰트 굵기 */
+  color: var(--text-color); /* 텍스트 색상 */
+  margin-bottom: 0.2rem; /* 하단 마진 */
 }
 
 .mypage-form input {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 0.25rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 0.8rem; /* 패딩 */
+  border: 1px solid #d1d5db; /* 연한 회색 테두리 */
+  border-radius: 8px; /* 둥근 모서리 */
+  font-size: 1rem; /* 폰트 크기 */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* 테두리 색상 및 그림자 애니메이션 */
+  width: 100%; /* 너비 100% */
 }
 
-.mypage-form button {
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
+.mypage-form input:focus {
+  border-color: var(--primary-color); /* 포커스 시 테두리 색상 변경 */
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2); /* 포커스 시 그림자 */
+  outline: none; /* 기본 아웃라인 제거 */
 }
+
+/* Buttons */
+.mypage-form button,
+.mypage-button-group button,
+.edit-button { /* 모든 관련 버튼에 스타일 적용 */
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); /* 그라데이션 배경 */
+  color: white; /* 텍스트 색상 */
+  padding: 0.8rem 1.5rem; /* 패딩 */
+  border: none; /* 테두리 제거 */
+  border-radius: 50px; /* 매우 둥근 모서리 (알약 형태) */
+  font-size: 1rem; /* 폰트 크기 */
+  font-weight: 700; /* 폰트 굵기 */
+  cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* 변형, 그림자, 배경 애니메이션 */
+  box-shadow: var(--shadow); /* 그림자 */
+  animation: pulse 2s infinite ease-in-out; /* 펄스 애니메이션 */
+  display: inline-flex; /* 텍스트와 아이콘 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center; /* 가로 중앙 정렬 */
+  gap: 0.5rem; /* 텍스트와 아이콘 간격 */
+}
+
+.mypage-form button:hover,
+.mypage-button-group button:hover,
+.edit-button:hover,
+.mypage-form button:focus,
+.mypage-button-group button:focus,
+.edit-button:focus {
+  transform: translateY(-2px) scale(1.02); /* 호버 시 약간 위로 이동 및 확대 */
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5); /* 그림자 강화 */
+  background: linear-gradient(90deg, #6d28d9, #9333ea); /* 배경 그라데이션 변경 */
+  animation: none; /* 펄스 애니메이션 중지 */
+}
+
 .edit-button {
-  float: right;
-  margin-bottom: 10px;
+  float: right; /* 오른쪽으로 부동 */
+  margin-bottom: 10px; /* 하단 마진 */
+  /* float 사용 시 컨테이너 높이 문제 발생할 수 있으므로, flex나 grid로 레이아웃 재고 필요 */
 }
 
 
-.mypage-form button:hover {
-  background-color: #4338ca;
-}
-
+/* Post List */
 .post-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  gap: 1.25rem; /* 아이템 간 간격 */
 }
 
 .post-card {
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: #fff;
-  transition: box-shadow 0.2s;
-}
-.post-item {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+  padding: 1.5rem; /* 패딩 */
+  border: 1px solid #e5e7eb; /* 연한 테두리 */
+  border-radius: var(--border-radius); /* 둥근 모서리 */
+  background-color: #fff; /* 흰색 배경 */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 그림자 및 변형 애니메이션 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* 기본 그림자 */
 }
 
 .post-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow); /* 호버 시 그림자 강화 */
+  transform: translateY(-3px); /* 호버 시 약간 위로 이동 */
 }
 
 .post-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem; /* 폰트 크기 */
+  font-weight: 700; /* 폰트 굵기 */
+  color: var(--text-color); /* 텍스트 색상 */
+  margin-bottom: 0.75rem; /* 하단 마진 */
 }
 
 .post-card p {
-  color: #444;
-  margin-bottom: 0.3rem;
+  color: #475569; /* 텍스트 색상 */
+  line-height: 1.6; /* 줄 간격 */
+  margin-bottom: 0.5rem; /* 하단 마진 */
+}
+
+/* The original .post-item was a bit redundant with .post-card if .post-card is the main list item.
+   If .post-item is still needed for outer wrapper, consider adjusting its styles to not conflict.
+   For now, I'm assuming .post-card is the primary list item.
+*/
+/* .post-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+} */
+
+
+/* Animations (공통 애니메이션) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0; /* 초기 투명 */
+    transform: translateY(20px); /* 아래에서 위로 이동 */
+  }
+  to {
+    opacity: 1; /* 최종 불투명 */
+    transform: translateY(0); /* 원래 위치 */
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1); /* 초기/최종 크기 */
+  }
+  50% {
+    transform: scale(1.01); /* 중간에 약간 확대 */
+  }
+}
+
+/* Responsive Design (미디어 쿼리) */
+@media (max-width: 768px) {
+  .mypage-header {
+    flex-direction: column; /* 세로 방향으로 변경 */
+    padding: 1.2rem; /* 패딩 조정 */
+    gap: 1rem; /* 간격 조정 */
+  }
+
+  .mypage-header h1 {
+    font-size: 1.6rem; /* 폰트 크기 조정 */
+  }
+
+  .mypage-button-group {
+    flex-direction: column; /* 버튼 그룹 세로 정렬 */
+    gap: 0.75rem;
+  }
+
+  .profile-section,
+  .post-section {
+    padding: 1.5rem; /* 패딩 조정 */
+  }
+
+  .profile-section h2,
+  .post-section h2 {
+    font-size: 1.5rem; /* 폰트 크기 조정 */
+  }
+
+  .mypage-form input,
+  .mypage-form button {
+    padding: 0.7rem; /* 패딩 조정 */
+    font-size: 0.95rem; /* 폰트 크기 조정 */
+  }
+
+  .post-card {
+    padding: 1.2rem; /* 패딩 조정 */
+  }
+
+  .post-card h3 {
+    font-size: 1.1rem; /* 폰트 크기 조정 */
+  }
+
+  .post-card p {
+    font-size: 0.9rem; /* 폰트 크기 조정 */
+  }
+}
+
+@media (max-width: 480px) {
+  .mypage-container {
+    padding: 10px; /* 전체 컨테이너 패딩 조정 */
+  }
+
+  .mypage-header {
+    padding: 1rem; /* 패딩 조정 */
+  }
+
+  .mypage-header h1 {
+    font-size: 1.4rem; /* 폰트 크기 조정 */
+  }
+
+  .mypage-button-group button {
+    width: 100%; /* 너비 100% */
+  }
+
+  .profile-section,
+  .post-section {
+    padding: 1rem; /* 패딩 조정 */
+  }
+
+  .profile-section h2,
+  .post-section h2 {
+    font-size: 1.3rem; /* 폰트 크기 조정 */
+  }
+
+  .mypage-form input {
+    padding: 0.6rem; /* 패딩 조정 */
+  }
+
+  .mypage-form button {
+    padding: 0.6rem 1rem; /* 패딩 조정 */
+    font-size: 0.9rem; /* 폰트 크기 조정 */
+  }
+}
+
+/* Accessibility */
+:focus {
+  outline: 3px solid var(--primary-color); /* 포커스 시 아웃라인 */
+  outline-offset: 2px; /* 아웃라인 오프셋 */
 }

@@ -1,68 +1,246 @@
-.signup-container {
-  background-color: #f3f4f6;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* CSS Variables */
+:root {
+  --primary-color: #7c3aed; /* 보라색 계열 */
+  --secondary-color: #f3e8ff; /* 연한 보라색 (배경 시작 색) */
+  --text-color: #1e293b; /* 어두운 텍스트 색상 */
+  --accent-color: #a855f7; /* 강조 색상 (더 밝은 보라색) */
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
+  --border-radius: 12px; /* 둥근 모서리 */
 }
 
-.signup-box {
-  background-color: white;
-  padding: 2rem;
-  padding-bottom: 30px; 
-  border-radius: 12px;
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box; /* 패딩과 보더가 너비/높이에 포함되도록 설정 */
+  margin: 0; /* 기본 마진 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+}
+
+.signup-container {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* 폰트 설정 */
+  background: linear-gradient(180deg, var(--secondary-color) 0%, #ffffff 100%); /* 그라데이션 배경 */
+  min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  position: relative; /* 의사 요소의 기준점 */
+  overflow: hidden; /* 컨테이너 밖으로 넘어가는 내용 숨김 */
+}
+
+/* Background Pattern (SVG 기반의 작은 원 패턴) */
+.signup-container::before {
+  content: ''; /* 의사 요소 */
+  position: absolute; /* 절대 위치 */
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  height: 100%;
+  /* SVG로 작은 원 패턴 생성 */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="10" cy="10" r="2" fill="rgba(124,58,237,0.1)" /></svg>') repeat;
+  opacity: 0.3; /* 투명도 */
+  z-index: 0; /* 배경이므로 가장 아래에 위치 */
+}
+
+/* Hero Section (회원가입 페이지 상단 영웅 섹션) */
+.hero-section {
+  text-align: center; /* 텍스트 중앙 정렬 */
+  margin-bottom: 2rem; /* 하단 마진 */
+  position: relative; /* z-index를 위한 포지션 */
+  z-index: 1; /* 다른 요소 위에 표시 */
+}
+
+.hero-icon {
+  font-size: 3rem; /* 아이콘 폰트 크기 */
+  display: block; /* 블록 요소로 표시 */
+  margin-bottom: 1rem; /* 하단 마진 */
+}
+
+.hero-section h1 {
+  font-size: 2.5rem; /* 폰트 크기 */
+  font-weight: 900; /* 폰트 굵기 */
+  color: var(--text-color); /* 텍스트 색상 */
+  margin-bottom: 1rem; /* 하단 마진 */
+  /* 텍스트에 그라데이션 적용 */
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text; /* 텍스트 클립 (WebKit) */
+  background-clip: text; /* 텍스트 클립 */
+  -webkit-text-fill-color: transparent; /* 텍스트 색상을 투명하게 (WebKit) */
+}
+
+.hero-section p {
+  font-size: 1.2rem; /* 폰트 크기 */
+  color: #475569; /* 텍스트 색상 */
+  max-width: 500px; /* 최대 너비 */
+}
+
+/* Signup Box (회원가입 폼 컨테이너) */
+.signup-box {
+  background-color: white; /* 배경 색상 */
+  padding: 2rem; /* 내부 패딩 */
+  border-radius: var(--border-radius); /* 둥근 모서리 */
+  width: 100%; /* 너비 100% */
+  max-width: 400px; /* 최대 너비 */
+  box-shadow: var(--shadow); /* 그림자 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  position: relative; /* z-index를 위한 포지션 */
+  z-index: 1; /* 다른 요소 위에 표시 */
 }
 
 .signup-box h2 {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem; /* 하단 마진 */
+  font-size: 1.8rem; /* 폰트 크기 */
+  font-weight: 800; /* 폰트 굵기 */
+  color: var(--text-color); /* 텍스트 색상 */
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  gap: 1rem; /* 아이템 간 간격 */
+  margin-bottom: 1rem; /* 하단 마진 */
 }
 
 label {
-  text-align: left;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.2rem;
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+  font-size: 0.9rem; /* 폰트 크기 */
+  font-weight: 600; /* 폰트 굵기 */
+  color: var(--text-color); /* 텍스트 색상 */
+  margin-bottom: 0.2rem; /* 하단 마진 */
 }
 
 input {
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 0.8rem; /* 패딩 */
+  border: 1px solid #ccc; /* 테두리 */
+  border-radius: 6px; /* 둥근 모서리 */
+  font-size: 1rem; /* 폰트 크기 */
+  transition: border-color 0.3s ease; /* 테두리 색상 변경 애니메이션 */
+}
+
+input:focus {
+  border-color: var(--primary-color); /* 포커스 시 테두리 색상 변경 */
+  outline: none; /* 기본 아웃라인 제거 */
 }
 
 button {
-  background-color: #4f46e5;
-  color: white;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); /* 그라데이션 배경 */
+  color: white; /* 텍스트 색상 */
+  padding: 0.8rem; /* 패딩 */
+  border: none; /* 테두리 제거 */
+  border-radius: 50px; /* 매우 둥근 모서리 (알약 형태) */
+  font-size: 1rem; /* 폰트 크기 */
+  font-weight: 700; /* 폰트 굵기 */
+  cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 변형, 그림자 애니메이션 */
+  box-shadow: var(--shadow); /* 그림자 */
+  animation: pulse 2s infinite ease-in-out; /* 펄스 애니메이션 */
 }
 
-button:hover {
-  background-color: #4338ca;
+/* 버튼::after (오른쪽 화살표) */
+button::after {
+  content: '→'; /* 화살표 아이콘 */
+  margin-left: 0.5rem; /* 왼쪽 마진 */
+  transition: transform 0.3s ease; /* 변형 애니메이션 */
+}
+
+button:hover,
+button:focus {
+  transform: translateY(-4px); /* 호버 시 위로 이동 */
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5); /* 그림자 강화 */
+  animation: none; /* 펄스 애니메이션 중지 */
+}
+
+button:hover::after,
+button:focus::after {
+  transform: translateX(5px); /* 화살표 오른쪽으로 이동 */
 }
 
 .signup-links {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
+  margin-top: 0.5rem; /* 상단 마진 */
+  font-size: 0.9rem; /* 폰트 크기 */
+  color: var(--primary-color); /* 텍스트 색상 */
 }
 
 .signup-links a {
-  color: #4f46e5;
-  text-decoration: none;
+  color: var(--primary-color); /* 링크 텍스트 색상 */
+  text-decoration: none; /* 밑줄 제거 */
+  position: relative; /* ::after 의사 요소의 기준점 */
+}
+
+/* 회원가입 링크 호버/포커스 시 밑줄 효과 */
+.signup-links a::after {
+  content: ''; /* 빈 내용 */
+  position: absolute; /* 절대 위치 */
+  width: 0; /* 초기 너비 0 */
+  height: 2px; /* 높이 */
+  bottom: -2px; /* 링크 아래에 위치 */
+  left: 0; /* 왼쪽에서 시작 */
+  background-color: var(--primary-color); /* 밑줄 색상 */
+  transition: width 0.3s ease; /* 너비 애니메이션 */
+}
+
+.signup-links a:hover::after,
+.signup-links a:focus::after {
+  width: 100%; /* 호버 시 밑줄 너비 100% */
+}
+
+/* Animations (공통 애니메이션) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0; /* 초기 투명 */
+    transform: translateY(30px); /* 아래에서 위로 이동 */
+  }
+  to {
+    opacity: 1; /* 최종 불투명 */
+    transform: translateY(0); /* 원래 위치 */
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1); /* 초기/최종 크기 */
+  }
+  50% {
+    transform: scale(1.02); /* 중간에 약간 확대 */
+  }
+}
+
+/* Responsive Design (미디어 쿼리) */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem; /* 폰트 크기 조정 */
+  }
+
+  .hero-section p {
+    font-size: 1rem; /* 폰트 크기 조정 */
+  }
+
+  .signup-box {
+    padding: 1.5rem; /* 패딩 조정 */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 1.8rem; /* 폰트 크기 조정 */
+  }
+
+  .hero-section p {
+    font-size: 0.9rem; /* 폰트 크기 조정 */
+  }
+
+  .signup-box {
+    padding: 1rem; /* 패딩 조정 */
+    max-width: 90%; /* 최대 너비 조정 */
+  }
+
+  button {
+    padding: 0.7rem; /* 패딩 조정 */
+    font-size: 0.9rem; /* 폰트 크기 조정 */
+  }
+}
+
+/* Accessibility (접근성) */
+:focus {
+  outline: 3px solid var(--primary-color); /* 포커스 시 아웃라인 */
+  outline-offset: 2px; /* 아웃라인 오프셋 */
 }

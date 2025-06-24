@@ -1,73 +1,389 @@
+/* CSS Variables */
+:root {
+  --primary-color: #7c3aed; /* 주 색상 (보라색 계열) */
+  --secondary-color: #f3e8ff; /* 연한 보라색 (배경 시작 색) */
+  --text-color: #1e293b; /* 어두운 텍스트 색상 */
+  --accent-color: #a855f7; /* 강조 색상 (더 밝은 보라색) */
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
+  --border-radius: 12px; /* 둥근 모서리 */
+  --input-focus-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2); /* 인풋 포커스 시 그림자 */
+}
+
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .post-detail-container {
-  background-color: #f9fafb;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(180deg, var(--secondary-color) 0%, #ffffff 100%);
   min-height: 100vh;
-  padding: 2rem;
-  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
-.back-btn {
-  background: none;
-  border: none;
-  color: #4f46e5;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-bottom: 1rem;
+/* Background Pattern */
+.post-detail-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="10" cy="10" r="2" fill="rgba(124,58,237,0.1)" /></svg>') repeat;
+  opacity: 0.3;
+  z-index: 0;
 }
 
-.post-card {
+/* Header */
+.post-detail-header {
+  width: 100%;
+  max-width: 800px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: #ffffff;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.post-detail-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Section */
+.post-detail-section {
+  width: 100%;
+  max-width: 800px;
   background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Post Card */
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .post-title {
   font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
 .post-meta {
   color: #6b7280;
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .post-content {
   white-space: pre-wrap;
   line-height: 1.6;
   font-size: 1rem;
+  color: var(--text-color);
 }
 
-/* 참여하기 버튼 스타일링 */
-.join-button {
-  position: fixed;  /* 버튼을 화면에 고정 */
-  top: 20px;  /* 상단 20px 위치 */
-  right: 20px;  /* 오른쪽 20px 위치 */
-  padding: 10px 20px;
-  background-color: #4f46e5;
+/* Post Actions */
+.post-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-actions button {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
   color: white;
+  padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-textarea {
-  width: 100%;
-  height: 80px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.post-actions button:hover,
+.post-actions button:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5);
 }
 
-.comments-section {
-  margin-top: 20px;
-  background: #f8f8f8;
-  padding: 20px;
+/* Edit Form */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.edit-form label {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.2rem;
+  display: block;
+}
+
+.edit-form input,
+.edit-form select,
+.edit-form textarea {
+  padding: 0.9rem;
+  border: 1px solid #d1d5db;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
 }
 
-.join-button:hover {
-  background-color: #3b3bdb;
+.edit-form input:focus,
+.edit-form select:focus,
+.edit-form textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: var(--input-focus-shadow);
+  outline: none;
+}
+
+.edit-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.edit-form button[type="submit"] {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow);
+  margin-top: 1.5rem;
+}
+
+.edit-form button[type="submit"]:hover,
+.edit-form button[type="submit"]:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5);
+}
+
+/* Join Button */
+.join-button {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow);
+  margin: 1.5rem 0;
+}
+
+/* Comments Section */
+.comments-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f8f8;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.comments-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.comment {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comment p {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;       /* 👉 긴 단어 줄바꿈 처리 */
+  white-space: pre-wrap;      /* 👉 줄바꿈 + 공백 유지 */
+}
+
+.comment span {
+  display: block;
+  text-align: right;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.3rem;
+}
+
+.comments-section textarea {
+  width: 100%;
+  padding: 0.9rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.comments-section textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: var(--input-focus-shadow);
+  outline: none;
+}
+
+.comments-section button {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 1rem;
+}
+
+.comments-section button:hover,
+.comments-section button:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5);
+}
+
+/* Loading State */
+.loading {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .post-detail-header,
+  .post-detail-section {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-detail-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .edit-form,
+  .comments-section {
+    gap: 1rem;
+  }
+
+  .edit-form input,
+  .edit-form select,
+  .edit-form textarea,
+  .comments-section textarea {
+    padding: 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .edit-form button[type="submit"],
+  .join-button,
+  .comments-section button,
+  .post-actions button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-detail-container {
+    padding: 10px;
+  }
+
+  .post-detail-header,
+  .post-detail-section {
+    padding: 1rem;
+  }
+
+  .post-detail-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .edit-form,
+  .comments-section {
+    gap: 0.8rem;
+  }
+
+  .edit-form input,
+  .edit-form select,
+  .edit-form textarea,
+  .comments-section textarea {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .edit-form button[type="submit"],
+  .join-button,
+  .comments-section button,
+  .post-actions button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+.post-relative-time {
+  text-align: right;
+  font-style: italic;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+/* Accessibility */
+:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
 }

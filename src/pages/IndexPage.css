@@ -1,54 +1,284 @@
-.container {
-  font-family: 'Arial', sans-serif;
-  text-align: center;
-  background-color: #f3f4f6;
-  min-height: 100vh;
+/* CSS Variables */
+:root {
+  --primary-color: #7c3aed; /* 보라색 계열 */
+  --secondary-color: #f3e8ff; /* 연한 보라색 (배경 시작 색) */
+  --text-color: #1e293b; /* 어두운 텍스트 색상 */
+  --accent-color: #a855f7; /* 강조 색상 (더 밝은 보라색) */
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* 그림자 효과 */
+  --border-radius: 12px; /* 둥근 모서리 */
 }
 
+/* Reset and Base Styles */
+* {
+  box-sizing: border-box; /* 패딩과 보더가 너비/높이에 포함되도록 설정 */
+  margin: 0; /* 기본 마진 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+}
+
+.container {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* 폰트 설정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  background: linear-gradient(180deg, var(--secondary-color) 0%, #ffffff 100%); /* 그라데이션 배경 */
+  min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  position: relative; /* 의사 요소의 기준점 */
+  overflow: hidden; /* 컨테이너 밖으로 넘어가는 내용 숨김 */
+}
+
+/* Background Pattern (SVG 기반의 작은 원 패턴) */
+.container::before {
+  content: ''; /* 의사 요소 */
+  position: absolute; /* 절대 위치 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* SVG로 작은 원 패턴 생성 */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="10" cy="10" r="2" fill="rgba(124,58,237,0.1)" /></svg>') repeat;
+  opacity: 0.3; /* 투명도 */
+  z-index: 0; /* 배경이므로 가장 아래에 위치 */
+}
+
+/* Header */
 .header {
-  background-color: #4f46e5;
-  color: white;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); /* 그라데이션 배경 */
+  color: #ffffff; /* 텍스트 색상 */
+  padding: 1.5rem 4rem; /* 상하 1.5rem, 좌우 4rem 패딩 */
+  display: flex; /* Flexbox 레이아웃 사용 */
+  justify-content: space-between; /* 양 끝 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  box-shadow: var(--shadow); /* 그림자 */
+  position: sticky; /* 스크롤 시 상단에 고정 */
+  top: 0; /* 상단에 고정 */
+  z-index: 100; /* 다른 요소 위에 표시 */
+}
+
+.header h2 {
+  font-size: 2rem; /* 폰트 크기 */
+  font-weight: 800; /* 폰트 굵기 */
+  letter-spacing: -0.03em; /* 자간 조절 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 텍스트 그림자 */
+}
+
+.header nav {
+  display: flex; /* Flexbox 레이아웃 사용 */
+  gap: 1.75rem; /* 아이템 간 간격 */
 }
 
 .header nav a {
-  color: white;
-  margin: 0 1rem;
-  text-decoration: none;
-  font-weight: bold;
+  color: #ffffff; /* 링크 텍스트 색상 */
+  text-decoration: none; /* 밑줄 제거 */
+  font-weight: 700; /* 폰트 굵기 */
+  font-size: 1.1rem; /* 폰트 크기 */
+  position: relative; /* ::after 의사 요소의 기준점 */
+  transition: color 0.3s ease, transform 0.3s ease; /* 호버 시 색상 및 변형 애니메이션 */
 }
 
+/* 네비게이션 링크 호버/포커스 시 밑줄 효과 */
+.header nav a::after {
+  content: ''; /* 빈 내용 */
+  position: absolute; /* 절대 위치 */
+  width: 0; /* 초기 너비 0 */
+  height: 2px; /* 높이 */
+  bottom: -4px; /* 링크 아래에 위치 */
+  left: 0; /* 왼쪽에서 시작 */
+  background-color: #ffffff; /* 밑줄 색상 */
+  transition: width 0.3s ease; /* 너비 애니메이션 */
+}
+
+.header nav a:hover,
+.header nav a:focus {
+  color: #e9d5ff; /* 호버 시 텍스트 색상 변경 */
+  transform: translateY(-2px); /* 약간 위로 이동 */
+}
+
+.header nav a:hover::after,
+.header nav a:focus::after {
+  width: 100%; /* 호버 시 밑줄 너비 100% */
+}
+
+/* Hero Section (메인 영웅 섹션) */
 .hero {
-  margin-top: 4rem;
+  margin: 6rem auto; /* 상하 6rem, 좌우 자동 (가운데 정렬) 마진 */
+  padding: 3rem 1.5rem; /* 패딩 */
+  max-width: 1000px; /* 최대 너비 */
+  position: relative; /* z-index를 위한 포지션 */
+  z-index: 1; /* 다른 요소 위에 표시 */
+  animation: fadeInUp 1s ease-out; /* 등장 애니메이션 */
+}
+
+.hero-icon {
+  font-size: 3rem; /* 아이콘 폰트 크기 */
+  display: block; /* 블록 요소로 표시 */
+  margin-bottom: 1rem; /* 하단 마진 */
 }
 
 .hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 3.5rem; /* 폰트 크기 */
+  font-weight: 900; /* 폰트 굵기 */
+  color: var(--text-color); /* 텍스트 색상 */
+  margin-bottom: 2rem; /* 하단 마진 */
+  line-height: 1.1; /* 줄 간격 */
+  /* 텍스트에 그라데이션 적용 */
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text; /* 텍스트 클립 (WebKit) */
+  background-clip: text; /* 텍스트 클립 */
+  -webkit-text-fill-color: transparent; /* 텍스트 색상을 투명하게 (WebKit) */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 텍스트 그림자 */
 }
 
 .hero p {
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-  color: #333;
+  font-size: 1.3rem; /* 폰트 크기 */
+  color: #475569; /* 텍스트 색상 */
+  line-height: 1.9; /* 줄 간격 */
+  margin-bottom: 2.5rem; /* 하단 마진 */
+  max-width: 750px; /* 최대 너비 */
+  margin-left: auto;
+  margin-right: auto; /* 가운데 정렬 */
 }
 
 .hero button {
-  background-color: #4f46e5;
-  color: white;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); /* 그라데이션 배경 */
+  color: #ffffff; /* 텍스트 색상 */
+  padding: 1.3rem 3rem; /* 패딩 */
+  border: none; /* 테두리 제거 */
+  border-radius: 50px; /* 매우 둥근 모서리 (알약 형태) */
+  font-size: 1.2rem; /* 폰트 크기 */
+  font-weight: 700; /* 폰트 굵기 */
+  cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* 변형, 그림자, 배경 애니메이션 */
+  box-shadow: var(--shadow); /* 그림자 */
+  display: inline-flex; /* Flexbox 인라인 요소 */
+  align-items: center; /* 세로 중앙 정렬 */
+  gap: 0.5rem; /* 아이템 간 간격 */
+  animation: pulse 2s infinite ease-in-out; /* 펄스 애니메이션 */
 }
 
-.hero button:hover {
-  background-color: #3730a3;
+/* Hero 버튼::after (오른쪽 화살표) */
+.hero button::after {
+  content: '→'; /* 화살표 아이콘 */
+  font-size: 1rem; /* 폰트 크기 */
+  transition: transform 0.3s ease; /* 변형 애니메이션 */
+}
+
+.hero button:hover,
+.hero button:focus {
+  transform: translateY(-4px) scale(1.05); /* 호버 시 위로 이동 및 약간 확대 */
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5); /* 그림자 강화 */
+  background: linear-gradient(90deg, #6d28d9, #9333ea); /* 배경 그라데이션 변경 */
+  animation: none; /* 펄스 애니메이션 중지 */
+}
+
+.hero button:hover::after,
+.hero button:focus::after {
+  transform: translateX(5px); /* 화살표 오른쪽으로 이동 */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0; /* 초기 투명 */
+    transform: translateY(30px); /* 아래에서 위로 이동 */
+  }
+  to {
+    opacity: 1; /* 최종 불투명 */
+    transform: translateY(0); /* 원래 위치 */
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1); /* 초기/최종 크기 */
+  }
+  50% {
+    transform: scale(1.02); /* 중간에 약간 확대 */
+  }
+}
+
+/* Responsive Design (미디어 쿼리) */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* 세로 방향으로 변경 */
+    padding: 1.2rem; /* 패딩 조정 */
+    gap: 1.2rem; /* 간격 조정 */
+  }
+
+  .header h2 {
+    font-size: 1.6rem; /* 폰트 크기 조정 */
+  }
+
+  .header nav {
+    gap: 1rem; /* 간격 조정 */
+  }
+
+  .header nav a {
+    margin: 0 1rem; /* 마진 조정 */
+    font-size: 1rem; /* 폰트 크기 조정 */
+  }
+
+  .hero {
+    margin: 4rem auto; /* 마진 조정 */
+    padding: 2rem 1rem; /* 패딩 조정 */
+  }
+
+  .hero-icon {
+    font-size: 2.5rem; /* 폰트 크기 조정 */
+  }
+
+  .hero h1 {
+    font-size: 2.5rem; /* 폰트 크기 조정 */
+  }
+
+  .hero p {
+    font-size: 1.1rem; /* 폰트 크기 조정 */
+  }
+
+  .hero button {
+    padding: 1.1rem 2.5rem; /* 패딩 조정 */
+    font-size: 1.1rem; /* 폰트 크기 조정 */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    margin: 3rem auto; /* 마진 조정 */
+    padding: 1.5rem 1rem; /* 패딩 조정 */
+  }
+
+  .hero-icon {
+    font-size: 2rem; /* 폰트 크기 조정 */
+  }
+
+  .hero h1 {
+    font-size: 2rem; /* 폰트 크기 조정 */
+  }
+
+  .hero p {
+    font-size: 1rem; /* 폰트 크기 조정 */
+  }
+
+  .hero button {
+    padding: 1rem 2rem; /* 패딩 조정 */
+    font-size: 1rem; /* 폰트 크기 조정 */
+    width: 100%; /* 너비 100% */
+  }
+}
+
+/* Accessibility (접근성) */
+:focus {
+  outline: 3px solid var(--primary-color); /* 포커스 시 아웃라인 */
+  outline-offset: 2px; /* 아웃라인 오프셋 */
+}
+
+.sr-only {
+  /* 화면 리더기 전용 텍스트 (시각적으로 숨김) */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

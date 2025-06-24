@@ -7,17 +7,10 @@ export default function BackButton() {
   return (
     <button
       onClick={() => navigate(-1)}
-      style={{
-        backgroundColor: '#f3f4f6', // 연회색
-        color: '#4f46e5',           // 보라색 글자
-        border: 'none',
-        padding: '8px 14px',
-        borderRadius: '6px',
-        cursor: 'pointer',
-        fontWeight: 'bold',
-      }}
+      // ⭐️ 인라인 스타일을 제거하고 CSS 클래스를 적용합니다. ⭐️
+      className="back-button"
     >
-      🔙 뒤로가기
+      뒤로가기
     </button>
   );
 }

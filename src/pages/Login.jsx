@@ -33,6 +33,12 @@ export default function Login() {
 
   return (
     <div className="login-container">
+      <div className="hero-section">
+        <span className="hero-icon">🍚</span>
+        <h1>밥풀에 오신 걸 환영해요!</h1>
+        <p>로그인하고 친구들과 함께 배달비를 절약하세요!</p>
+      </div>
+
       <div className="login-box">
         <h2>로그인</h2>
         <form onSubmit={handleLogin}>
@@ -44,6 +50,7 @@ export default function Login() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            aria-label="이메일 입력"
           />
 
           <label htmlFor="password">비밀번호</label>
@@ -54,9 +61,13 @@ export default function Login() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            aria-label="비밀번호 입력"
           />
 
-          <button type="submit">로그인</button>
+          <button type="submit" aria-label="로그인 버튼">
+            로그인
+          </button>
+
         </form>
 
         <div className="login-links">

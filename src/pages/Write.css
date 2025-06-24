@@ -1,4 +1,4 @@
-/* CSS Variables (PostDetail.jsx와 동일) */
+/* CSS Variables */
 :root {
   --primary-color: #7c3aed; /* 주 색상 (보라색 계열) */
   --secondary-color: #f3e8ff; /* 연한 보라색 (배경 시작 색) */
@@ -16,7 +16,7 @@
   padding: 0;
 }
 
-.edit-mypage-container {
+.write-container {
   font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: linear-gradient(180deg, var(--secondary-color) 0%, #ffffff 100%);
   min-height: 100vh;
@@ -29,7 +29,7 @@
 }
 
 /* Background Pattern */
-.edit-mypage-container::before {
+.write-container::before {
   content: '';
   position: absolute;
   top: 0;
@@ -42,9 +42,9 @@
 }
 
 /* Header */
-.edit-mypage-header {
+.write-header {
   width: 100%;
-  max-width: 800px;
+  max-width: 800px; /* 마이페이지보다 약간 좁게 설정 */
   background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
   color: #ffffff;
   padding: 1.5rem 2rem;
@@ -58,17 +58,17 @@
   z-index: 1;
 }
 
-.edit-mypage-header h2 {
+.write-header h2 {
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Section */
-.edit-mypage-section {
+/* Form Section Wrapper */
+.write-form-section {
   width: 100%;
-  max-width: 800px;
+  max-width: 800px; /* 마이페이지보다 약간 좁게 설정 */
   background-color: white;
   padding: 2.5rem;
   border-radius: var(--border-radius);
@@ -78,84 +78,91 @@
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Form */
-.edit-mypage-form {
+form.write-form { /* form 태그에 직접 적용되는 스타일 */
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.25rem; /* 폼 요소 간 간격 */
 }
 
-.edit-mypage-form label {
+label {
   text-align: left;
-  font-size: 1rem;
+  font-size: 1rem; /* 레이블 폰트 크기 조정 */
   font-weight: 600;
   color: var(--text-color);
   margin-bottom: 0.2rem;
-  display: block;
+  display: block; /* 레이블이 한 줄을 차지하도록 */
 }
 
-.edit-mypage-form input {
-  padding: 0.9rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"],
+select,
+textarea {
+  padding: 0.9rem; /* 패딩 조정 */
+  border: 1px solid #d1d5db; /* 연한 회색 테두리 */
+  border-radius: 8px; /* 둥근 모서리 */
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
+  width: 100%; /* 너비 100% */
 }
 
-.edit-mypage-form input:focus {
+input:focus,
+select:focus,
+textarea:focus {
   border-color: var(--primary-color);
   box-shadow: var(--input-focus-shadow);
   outline: none;
 }
 
-.edit-mypage-form .error-message {
-  color: #dc2626;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+textarea {
+  resize: vertical; /* 세로 크기 조절만 가능 */
+  min-height: 100px; /* 최소 높이 */
 }
 
-/* Form Actions */
-.form-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.form-actions button {
+/* Button Styling (등록하기 버튼) */
+.write-form button[type="submit"] {
   background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
   color: white;
-  padding: 0.9rem 2rem;
+  padding: 0.9rem 2rem; /* 패딩 조정 */
   border: none;
-  border-radius: 50px;
-  font-size: 1.1rem;
+  border-radius: 50px; /* 알약 형태 */
+  font-size: 1.1rem; /* 폰트 크기 조정 */
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   box-shadow: var(--shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem; /* 상단 마진 */
 }
 
-.form-actions button[type="button"] {
-  background: linear-gradient(90deg, #6b7280, #4b5563);
+.write-form button[type="submit"]:hover,
+.write-form button[type="submit"]:focus {
+  transform: translateY(-3px) scale(1.01); /* 호버 시 약간 이동 및 확대 */
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5); /* 그림자 강화 */
+  background: linear-gradient(90deg, #6d28d9, #9333ea);
 }
 
-.form-actions button:hover,
-.form-actions button:focus {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5);
+/* 뒤로가기 버튼 (BackButton 컴포넌트용) */
+.back-button {
+  background-color: transparent; /* 배경 투명 */
+  color: white; /* 글씨 흰색 */
+  border: 1px solid white; /* 흰색 테두리 */
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, transform 0.2s;
+  display: inline-flex; /* 아이콘과 텍스트 정렬 */
+  align-items: center;
+  gap: 0.5rem; /* 아이콘과 텍스트 간격 */
 }
 
-.form-actions button[type="button"]:hover,
-.form-actions button[type="button"]:focus {
-  box-shadow: 0 8px 20px rgba(107, 114, 128, 0.5);
-}
-
-/* Loading State */
-.loading {
-  font-size: 1.2rem;
-  color: var(--text-color);
-  text-align: center;
-  padding: 2rem;
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* 호버 시 투명한 흰색 배경 */
+  transform: translateY(-2px); /* 약간 위로 이동 */
 }
 
 /* Animations */
@@ -172,55 +179,63 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .edit-mypage-header,
-  .edit-mypage-section {
+  .write-header,
+  .write-form-section {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
-  .edit-mypage-header h2 {
+  .write-header h2 {
     font-size: 1.6rem;
   }
 
-  .edit-mypage-form {
+  form.write-form {
     gap: 1rem;
   }
 
-  .edit-mypage-form input {
+  input[type="text"],
+  input[type="number"],
+  input[type="datetime-local"],
+  select,
+  textarea {
     padding: 0.7rem;
     font-size: 0.95rem;
   }
 
-  .form-actions button {
+  .write-form button[type="submit"] {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .edit-mypage-container {
+  .write-container {
     padding: 10px;
   }
 
-  .edit-mypage-header,
-  .edit-mypage-section {
+  .write-header,
+  .write-form-section {
     padding: 1rem;
   }
 
-  .edit-mypage-header h2 {
+  .write-header h2 {
     font-size: 1.4rem;
   }
 
-  .edit-mypage-form {
+  form.write-form {
     gap: 0.8rem;
   }
 
-  .edit-mypage-form input {
+  input[type="text"],
+  input[type="number"],
+  input[type="datetime-local"],
+  select,
+  textarea {
     padding: 0.6rem;
     font-size: 0.9rem;
   }
 
-  .form-actions button {
+  .write-form button[type="submit"] {
     padding: 0.7rem 1.2rem;
     font-size: 0.95rem;
   }

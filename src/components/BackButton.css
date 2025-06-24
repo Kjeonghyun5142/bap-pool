@@ -1,7 +1,7 @@
 .back-button {
-  background-color: #f3f4f6; /* 연한 회색 배경 */
-  color: #4f46e5;            /* 보라색 글씨 */
-  border: 1px solid #4f46e5; /* 보라색 테두리 */
+  background-color: #4f46e5;   /* 보라색 배경 (기존 배경색을 활용) */
+  color: white;                /* ✅ 글씨 흰색으로 변경 */
+  border: 1px solid #4f46e5;  /* 보라색 테두리 */
   padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
@@ -10,6 +10,6 @@
 }
 
 .back-button:hover {
-  background-color: #e0e7ff; /* 호버 시 살짝 더 진한 회색 */
-  color: #3730a3;             /* 진한 보라색 텍스트 */
+  background-color: #3730a3; /* 호버 시 더 진한 보라색 */
+  color: white;               /* ✅ 호버 시에도 글씨 흰색 유지 */
 }

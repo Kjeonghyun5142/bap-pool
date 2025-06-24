@@ -10,6 +10,7 @@ export default function IndexPage() {
     <div className="container">
       <header className="header">
         <h2>🍚 밥풀 BapPool</h2>
+        <nav role="navigation" aria-label="Main navigation"></nav>
         <nav>
           <Link to="/intro">서비스 소개</Link>
           <Link to="/login">로그인</Link>
@@ -18,9 +19,10 @@ export default function IndexPage() {
       </header>
 
       <section className="hero">
-        <h1>혼밥 그만! 같이 시켜요!</h1>
+        <span className="hero-icon">🍚</span>
+        <h1>혼밥 대신 같이 배달! 밥풀로 시작하세요!</h1>
         <p>기숙사, 자취생들을 위한 배달비 아끼는 플랫폼</p>
-        <button onClick={() => navigate('/signup')}>지금 시작하기</button>
+        <button onClick={() => navigate('/signup')}>지금 가입하고 배달비 절감!</button>
       </section>
     </div>
   );

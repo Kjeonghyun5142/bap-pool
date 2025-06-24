@@ -52,6 +52,11 @@ export default function Signup() {
 
   return (
     <div className="signup-container">
+      <div className="hero-section">
+        <span className="hero-icon">🍚</span>
+        <h1>밥풀과 함께 배달비 절약 시작!</h1>
+        <p>회원가입하고 친구들과 맛있는 식사를 공유하세요!</p>
+      </div>
       <div className="signup-box">
         <h2>회원가입</h2>
         <form onSubmit={handleSignup}>
@@ -63,6 +68,7 @@ export default function Signup() {
             required
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
+            aria-label="닉네임 입력"
           />
 
           <label htmlFor="email">이메일</label>
@@ -73,6 +79,7 @@ export default function Signup() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            aria-label="이메일 입력"
           />
 
           <label htmlFor="password">비밀번호</label>
@@ -83,6 +90,7 @@ export default function Signup() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            aria-label="비밀번호 입력"
           />
 
           <label htmlFor="confirmPassword">비밀번호 확인</label>
@@ -93,6 +101,7 @@ export default function Signup() {
             required
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            aria-label="비밀번호 확인 입력"
           />
 
           <label htmlFor="dormitory">기숙사/자취 정보</label>
@@ -103,9 +112,10 @@ export default function Signup() {
             required
             value={dormitory}
             onChange={(e) => setDormitory(e.target.value)}
+            aria-label="기숙사 또는 자취 정보 입력"
           />
 
-          <button type="submit">가입하기</button>
+          <button type="submit" aria-label="회원가입 버튼">가입하기</button>
         </form>
 
         <div className="signup-links">
