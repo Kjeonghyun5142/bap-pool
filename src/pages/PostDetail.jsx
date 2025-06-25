@@ -379,7 +379,7 @@ export default function PostDetail() {
             <pre className="post-content">{post.content}</pre>
             <p>최소 가격: ₩{post.min_price.toLocaleString()}</p>
             <p>마감일: {new Date(post.deadline).toLocaleString()}</p>
-            <p>지역: {post.Zone?.name || '알 수 없음'}</p>
+            <p>위치: {post.Zone?.name || '알 수 없음'}</p>
             <p>현재 참여 인원: {post.current_participants_count}</p>
             <p>마감 여부: {isPostClosed(post) ? '마감됨' : '진행 중'}</p>
             <p className="post-relative-time">작성: {getRelativeTime(post.created_at)}</p>

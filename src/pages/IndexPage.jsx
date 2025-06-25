@@ -21,7 +21,7 @@ export default function IndexPage() {
       <section className="hero">
         <span className="hero-icon">🍚</span>
         <h1>혼밥 대신 같이 배달! 밥풀로 시작하세요!</h1>
-        <p>기숙사, 자취생들을 위한 배달비 아끼는 플랫폼</p>
+        <p>동아대 기숙사, 자취생들을 위한 배달비 아끼는 플랫폼</p>
         <button onClick={() => navigate('/signup')}>지금 가입하고 배달비 절감!</button>
       </section>
     </div>
